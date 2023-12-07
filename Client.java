@@ -18,8 +18,14 @@ public class Client {
             PrintWriter writer = new PrintWriter(socket.getOutputStream());
 
             while (true) {
-                System.out.print("Enter a message: ");
+                try{
+                    Thread.sleep(100);
+                }catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //System.out.print("Enter a message : "); A laisser pour voir avec une interface graphics
                 String message = scanner.nextLine();
+                
                 writer.println(message);
                 writer.flush();
             }
