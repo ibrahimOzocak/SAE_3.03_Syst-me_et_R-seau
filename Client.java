@@ -11,7 +11,7 @@ public class Client {
         try {
             Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
 
-            Thread serverListener = new Thread(new ServerListener(socket));
+            Thread serverListener = new Thread(new ServeurThread(socket));
             serverListener.start();
 
             Scanner scanner = new Scanner(System.in);
@@ -32,34 +32,6 @@ public class Client {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    static class ServerListener implements Runnable {
-        private Socket socket;
-        private Scanner reader;
-
-        public ServerListener(Socket socket) {
-            this.socket = socket;
-            try {
-                this.reader = new Scanner(socket.getInputStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void run() {
-            try {
-                while (true) {
-                    if (reader.hasNext()) {
-                        String message = reader.nextLine();
-                        System.out.println("Received from server: " + message);
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 }
