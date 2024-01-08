@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Client {
@@ -9,10 +11,24 @@ public class Client {
 
     private int idUser;
     private String nomUser;
+    private List<Message> listMessage;
 
     public Client(int idUser, String nomUser){
         this.idUser = idUser;
         this.nomUser = nomUser;
+        this.listMessage = new ArrayList<>();
+    }
+
+    public int getIdUser(){
+        return this.idUser;
+    }
+
+    public String getNomUser(){
+        return this.nomUser;
+    }
+
+    public List<Message> getListMessage(){
+        return this.listMessage;
     }
 
     public static void main(String[] args) {
@@ -33,7 +49,10 @@ public class Client {
                 }
                 //System.out.print("Enter a message : "); A laisser pour voir avec une interface graphics
                 String message = scanner.nextLine();
-                
+                if (message.substring(0,1).equals("/")){
+                    
+                }
+                this.listMessage.add(message);
                 writer.println(message);
                 writer.flush();
             }

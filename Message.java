@@ -14,4 +14,28 @@ public class Message {
         this.date = date;
         this.nbLike = nbLike;
     }
+
+    public int getIdMess(){
+        return this.idMess;
+    }
+
+    public Client getUser(){
+        return this.user;
+    }
+
+    public String getContent(){
+        return this.content;
+    }
+
+    public Date getDate(){
+        return this.date;
+    }
+
+    public int getNbLike(){
+        return this.nbLike;
+    }
+
+    public void setNbLike(){
+        this.nbLike+=1;
+    }
 }
