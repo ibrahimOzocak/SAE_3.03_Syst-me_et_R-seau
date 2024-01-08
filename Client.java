@@ -7,6 +7,14 @@ public class Client {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 8080;
 
+    private int idUser;
+    private String nomUser;
+
+    public Client(int idUser, String nomUser){
+        this.idUser = idUser;
+        this.nomUser = nomUser;
+    }
+
     public static void main(String[] args) {
         try {
             Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
