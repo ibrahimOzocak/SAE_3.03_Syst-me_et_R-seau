@@ -39,7 +39,7 @@ public class Client {
                 }
                 //System.out.print("Enter a message : "); A laisser pour voir avec une interface graphics
                 String message = scanner.nextLine();
-                idMessage++;
+                idMessage++;                                // mettre les id pour les messages dans le serveur
                 String[] motMessage = message.split(" ");
                 if (message.substring(0,1).equals("/")){    // verifie si c'est une commande
                     if (message.equals("/lMessage")){
