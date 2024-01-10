@@ -2,12 +2,12 @@ import java.sql.Date;
 
 public class Message {
     private int idMess;
-    private Client user;
+    private String user;
     private String content;
     private Date date;
     private int nbLike;
 
-    public Message(int idMess, Client user, String content, Date date, int nbLike){
+    public Message(int idMess, String user, String content, Date date, int nbLike){
         this.idMess = idMess;
         this.user = user;
         this.content = content;
@@ -19,7 +19,7 @@ public class Message {
         return this.idMess;
     }
 
-    public Client getUser(){
+    public String getUser(){
         return this.user;
     }
 
@@ -37,5 +37,10 @@ public class Message {
 
     public void setNbLike(){
         this.nbLike+=1;
+    }
+
+    @Override
+    public String toString(){
+        return "[ id : "+this.idMess+", user : "+ this.user+", content : "+this.content+", date : "+this.date+", nombre de like : "+this.nbLike; 
     }
 }
