@@ -1,15 +1,13 @@
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 class ClientThread extends Thread {
         private Socket clientSocket;
         private Scanner reader;
-
 
         public ClientThread(Socket socket) {
             this.clientSocket = socket;
@@ -26,8 +24,18 @@ class ClientThread extends Thread {
                 while (true) {
                     if (reader.hasNext()) {
                         String message = reader.nextLine();
-                        System.out.println("Received: " + message);
-                        broadcast(message);
+                        if (message.equals("teste")){               // changer le message utiliser
+                            broadcastID(Serveur.getIdMessage());
+                        }
+                        else{
+                            String nomUser = reader.nextLine();
+                            LocalDate localDate = LocalDate.now();
+                            Date date = Date.valueOf(localDate);
+                            Serveur.getListMessage().add(new Message(Serveur.getIdMessage(), nomUser, message, date, 0));
+                            Serveur.ajoutIdMessage();
+                            System.out.println("Received: " + message);
+                            broadcast(message);
+                        }
                     }
                 }
             } finally {
@@ -40,14 +48,25 @@ class ClientThread extends Thread {
             }
         }
 
-    private static void broadcast(String message) {
+    private static void broadcastID(int id) {
         for (PrintWriter writer : Serveur.getClientOutputStreams()) {
             try {
-                writer.println(message);
+                writer.println(id);
                 writer.flush();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+        private static void broadcast(String message) {
+            for (PrintWriter writer : Serveur.getClientOutputStreams()) {
+                try {
+                    writer.println(message);
+                    writer.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
     }
 }
